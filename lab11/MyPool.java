@@ -100,11 +100,24 @@ class Primo implements Runnable {
    //...completar implementacao, recebe um numero inteiro positivo e imprime se esse numero eh primo ou nao
    public void run() {
     int i;
-    if(n<=1) System.out.println(n + " nao e primo");
-    if(n==2) System.out.println(n + " e primo");
-    if(n%2==0) System.out.println(n + " nao e primo");
+    if(n<=1){
+      System.out.println(n + " nao e primo");
+      return;
+    } 
+    if(n==2){
+      System.out.println(n + " e primo");
+      return;
+    } 
+    if(n%2==0){
+      System.out.println(n + " nao e primo");
+      return;
+    } 
     for(i=3; i< Math.sqrt(n)+1; i+=2) {
-      if(n%i==0) System.out.println(n + " nao e primo");
+      if(n%i==0){
+        System.out.println(n + " nao e primo");
+        return;
+      } 
+      
     }
     System.out.println(n + " e primo");
    }
@@ -112,19 +125,19 @@ class Primo implements Runnable {
 
 //Classe da aplicação (método main)
 class MyPool {
-    private static final int NTHREADS = 10;
+    private static final int NTHREADS = 50;
 
     public static void main (String[] args) {
       //--PASSO 2: cria o pool de threads
       FilaTarefas pool = new FilaTarefas(NTHREADS); 
       
       //--PASSO 3: dispara a execução dos objetos runnable usando o pool de threads
-      for (int i = 0; i < 25; i++) {
+      for (int i = 0; i < 20000; i++) {
         final String m = "Hello da tarefa " + i;
-        Runnable hello = new Hello(m);
-        pool.execute(hello);
-        //Runnable primo = new Primo(i);
-        //pool.execute(primo);
+        //Runnable hello = new Hello(m);
+        //pool.execute(hello);
+        Runnable primo = new Primo(i);
+        pool.execute(primo);
       }
 
       //--PASSO 4: esperar pelo termino das threads

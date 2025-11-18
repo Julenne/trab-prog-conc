@@ -70,22 +70,22 @@ public class FutureHello {
     // cria uma lista para armazenar referencias de chamadas assincronas
     List<Future<?>> list = new ArrayList<>();
 
-    for (int i = 0; i < N; i++) {
-      Callable<Long> worker = new MyCallable();
-      /*
-       * submit() permite enviar tarefas Callable ou Runnable e obter um objeto Future
-       * para acompanhar o progresso e recuperar o resultado da tarefa
-       */
-      Future<Long> submit = executor.submit(worker);
-      list.add(submit);
-    }
+    // for (int i = 0; i < N; i++) {
+    //   Callable<Long> worker = new MyCallable();
+    //   /*
+    //    * submit() permite enviar tarefas Callable ou Runnable e obter um objeto Future
+    //    * para acompanhar o progresso e recuperar o resultado da tarefa
+    //    */
+    //   Future<Long> submit = executor.submit(worker);
+    //   list.add(submit);
+    // }
 
     // System.out.println(list.size());
 
     // pode fazer outras tarefas...
 
-    long num = 1650;
-    for (long i = 0; i < num; i++) {
+    long num = 67;
+    for (long i = 1; i < num; i++) {
       Callable<Integer> worker = new Primo(i);
       Future<Integer> submit = executor.submit(worker);
       list.add(submit);
@@ -105,7 +105,7 @@ public class FutureHello {
         e.printStackTrace();
       }
     }
-    System.out.println(sum);
+    System.out.println("entrada= "+ num + "; nthreads=" + NTHREADS + "; saida=" + sum );
     executor.shutdown();
   }
 }
